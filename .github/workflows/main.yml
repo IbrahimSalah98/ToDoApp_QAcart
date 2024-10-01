@@ -1,4 +1,4 @@
-name: Java CI with Maven on macOS
+name: Java CI with Maven on Windows
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: windows-latest  # Change from macOS to Windows
 
     steps:
       - name: Checkout code
@@ -19,18 +19,19 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '22'
+          java-version: '21'
           distribution: 'temurin'
+
       - name: Install Chrome
         run: |
-          brew install --cask google-chrome
+          choco install googlechrome --no-progress  # Use Chocolatey to install Chrome on Windows
+
       - name: Install ChromeDriver
         run: |
-          brew install chromedriver
+          choco install chromedriver --no-progress  # Install ChromeDriver on Windows
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -e
 
-      - name: Build with Maven
+      - name: Run with Maven
         run: mvn clean test
-
