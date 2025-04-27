@@ -31,7 +31,7 @@ jobs:
           choco install chromedriver --no-progress  # Install ChromeDriver on Windows
 
       - name: Build with Maven
-        run: mvn clean install -e -x
+        run: mvn clean install -e
 
         
 
